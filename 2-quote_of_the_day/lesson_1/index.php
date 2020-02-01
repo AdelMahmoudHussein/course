@@ -6,7 +6,7 @@
  * Time: 5:19 PM
  */
 
-                                 ### read ### write ### delete ### edit
+### read ### write ### delete ### edit
 
 #example 1 read the file
 

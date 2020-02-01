@@ -62,19 +62,10 @@ function import_quotes()
             $_SESSION['message'] = 'File too large. File must be less than 2 megabytes.';
         } else {
             $contents = file_get_contents($_FILES['quotes']['tmp_name']);
-            #var_dump($_FILES['quotes']);
-            //array(5) { 
-            //["name"]=> string(5) "t.txt" 
-            //["type"]=> string(10) "text/plain" 
-            //["tmp_name"]=> string(27) "C:\Windows\Temp\phpBCE0.tmp" 
-            //["error"]=> int(0) 
-            //["size"]=> int(63) }
-            
             $afile = fopen("quotes.txt", "a");
             fwrite($afile, $contents);
             fclose($afile);
         }
-        
         header('Location: ' . 'index.php');
     }
 }
