@@ -2,17 +2,18 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <title>Quote of the day</title>
+    <title>Image Uploader</title>
 </head>
 <body>
 <?php
+ini_set('display_errors', 1);
 // control all quotes
 include "functions.php";
-$quotes = read();
+$images = read();
 
 ?>
 <form action="functions.php" method="post" enctype="multipart/form-data">
-    <input type="file" name="quotes">
+    <input type="file" name="images">
     <div id='alert'>
         <div class=' alert alert-block alert-info fade in center'>
             <?= isset($_SESSION['message']) ? $_SESSION['message'] : ""; ?>
@@ -24,15 +25,17 @@ $quotes = read();
 <table>
     <thead>
     <td>Name</td>
+    <td>Image</td>
     <td>Options</td>
     </thead>
     <?php
-    foreach ($quotes as $key => $quote) { ?>
+    foreach ($images as $key => $image) { ?>
         <tr>
-            <td><?= $quote ?></td>
+            <td><?= explode('/', $image)[1] ?></td>
+            <td><?= "<img src=".$image." width=300 height=200>" ?></td>
             <td>
-                <a href="functions.php?delete&id=<?= $key ?>">Delete</a> ||
-                <a href="functions.php?edit&id=<?= $key ?>">Edit</a>
+                <a href="functions.php?delete&id=<?= $image ?>">Delete</a> ||
+                <a href="functions.php?edit&id=<?= $image ?>">Edit</a>
             </td>
         </tr>
     <?php }
