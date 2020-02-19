@@ -57,7 +57,8 @@ echo count($prices).' elements<br>';
 $tall = 178.5;
 $weight = "80";
 
-$size_diff = (int) ($tall - 100 - $weight) ;
+// take care not to use (int) but use (float)
+$size_diff = (float) ($tall - 100 - $weight) ;
 if($size_diff < 0){
     $size_recommendation =  "You should loose $size_diff Kg." ;
 }elseif($size_diff == 0){
