@@ -82,15 +82,20 @@ echo '<br>' . loop4($nums). '<br>';
 # create function that takes this array as a parameter :
 # array("fruit"=>"orange","country"=>"egypt","animal"=>"cat","device"=>"computer")
 # use switch to print every array element as a string (key = value) like this : device = computer
+
 $info = array("fruit"=>"orange","country"=>"egypt","animal"=>"cat","device"=>"computer");
-foreach ($info as $key => $value) {
-    // it is stupid use of switch as I think Now!?
-    switch ($key) {
-        case $key:
-            echo "$key = $value<br>";
-            break;
+function print_info($arr){
+    foreach ($arr as $key => $value) {
+        // it is stupid use of switch as I think Now!?
+        switch ($key) {
+            case $key:
+                echo "$key = $value<br>";
+                break;
+        }
     }
 }
+print_info($info);
+
 
 # Can we use Logical Operators with switch ,how - Google it ?
 // Yes Of Course
