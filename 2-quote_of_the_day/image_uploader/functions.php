@@ -4,6 +4,10 @@
  * User: Ahmed.Fakhr
  * Date: 2019-07-14
  * Time: 5:19 PM
+ * Solved by Apache NetBeans 11.2
+ * User: Adel.Mahmoud
+ * Date: 2020-02-19
+ * Time: 02:05 AM
  */
 ini_set('display_errors', 1);
 session_start();
