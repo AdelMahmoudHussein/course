@@ -1,28 +1,29 @@
 
 # What is the best data type and size to save your name ?
-## CODE HERE
+-- VARCHAR(50)
 
 # What is the best data type and size to save your mobile phone number ?
-## CODE HERE
+-- VARCHAR(15)
 
 # What is the best data type and size to save your tablet price ?
-## CODE HERE
+-- DECIMAL(8,2)
 
 # What is the best data type and size to save (yes,no) answer ?
-## CODE HERE
+-- may be BOOLEAN(1) --> which is TINYINT(1)
+-- or use VARCHAR(3)
 
 # What is the best data type and size to save your birth date ?
-## CODE HERE
+-- DATE()
 
 # What is the best data type and size to save product serial number ?
-## CODE HERE
+-- SERIAL() --> which is  by default (unsigned BIGINT(20), Auto Increment, Primary KEY)
 
 # What is the best data type and size to save your email address ?
-## CODE HERE
+-- VARCHAR(255) --> most people do that , but for me it is 150 
 
 # What is the best data type and size to save your Article Content ?
-## CODE HERE
+-- TEXT()
 
 # is it applicable to save interview date and time into varchar  ?
-## CODE HERE
+-- NO The Best is to save as DATETIME()
 
