@@ -1,5 +1,7 @@
 # get the last 5 rows in customers table
-## CODE HERE
+SELECT * FROM customers ORDER BY cust_id DESC LIMIT 5; -- 17,16,15,14,13
+-- How to get these rows with the right order 13,14,15,16,17
+
 
 # get rows between 10 and 12 in customers table
 SELECT * FROM customers LIMIT 10,2;
@@ -59,13 +61,38 @@ SET vend_zip = '5555'
 WHERE vend_country = 'USA';
 
 # try to delete only the last 2 notes from product_notes table
-## CODE HERE
+DELETE FROM product_notes
+ORDER BY note_id DESC LIMIT 2;
 
 # how to get the maximum and minimum price for products table GOOLE IT ?
+-- MY Answer without searching
+-- Maximum & Minimum but get only one result even there is two or more with the same value 
+SELECT * FROM products ORDER BY prod_price DESC LIMIT 1; -- Maximum
+SELECT * FROM products ORDER BY prod_price ASC LIMIT 1;  -- Minimum
 
+-- AFTER SEARCHING https://dev.mysql.com/doc/refman/8.0/en/example-maximum-row.html
+-- Maximum & Minimum that get all results NOT only ONE result
+SELECT * FROM products WHERE prod_price=(SELECT MAX(prod_price) FROM products);
+SELECT * FROM products WHERE prod_price=(SELECT MIN(prod_price) FROM products);
 
 # how to get the total prices for saled items table GOOLE IT ?
-
+SELECT SUM(item_price) AS total_sales FROM order_items; -- column header will be total_sales
+SELECT SUM(item_price) FROM order_items; -- column header will be SUM(item_price)
 
 # what is the meaning of aggregate functions  ?
+-- https://www.guru99.com/aggregate-functions.html --  COUNT  SUM  AVG  MIN  MAX 
+-- MySQL supports all the five (5) ISO standard aggregate functions COUNT, SUM, AVG, MIN and MAX.
+-- SUM and AVG functions only work on numeric data.
+-- If you want to exclude duplicate values from the aggregate function results, use the DISTINCT keyword. The ALL keyword includes even duplicates. If nothing is specified the ALL is assumed as the default.
+-- Aggregate functions can be used in conjunction with other SQL clauses such as GROUP BY
+
+-- https://dev.mysql.com/doc/refman/8.0/en/group-by-functions.html
+-- NOTES
+-- The SUM() and AVG() aggregate functions do not work with temporal values. 
+-- (They convert the values to numbers, losing everything after the first nonnumeric character.)
+-- To work around this problem, convert to numeric units, perform the aggregate operation, 
+-- and convert back to a temporal value. Examples:
+
+SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(time_col))) FROM tbl_name;
+SELECT FROM_DAYS(SUM(TO_DAYS(date_col))) FROM tbl_name;
 
