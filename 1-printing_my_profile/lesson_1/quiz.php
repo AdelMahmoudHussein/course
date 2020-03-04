@@ -11,6 +11,8 @@
  */
 echo '<br>Start<br>===================================<br>';
 
+define("NAME", "Adel Mahmoud");
+print NAME;
 
 # define variable (name) and assign value for your name as string
 $name ="Adel";
