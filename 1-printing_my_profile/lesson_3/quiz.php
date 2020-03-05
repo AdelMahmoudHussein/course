@@ -27,7 +27,7 @@ if($gender == 'male'){
 echo ($gender == 'male')? 'yes<br>': 'no<br>';
 
 # define array (prices) and assign integer value from 100 to 1000 range
-$prices = array(101,180,240,403,505,790,820,900,930,999);
+$prices = array(100,200,300,400,500,600,700,800,900,1000);
 
 #  print prices and gender  using var_dump
 var_dump($prices, $gender);
@@ -55,12 +55,13 @@ echo count($prices).' elements<br>';
 // We Will Use (int) casting
 
 $tall = 178.5;
-$weight = "80";
+$weight = "90";
 
 // take care not to use (int) but use (float)
 $size_diff = (float) ($tall - 100 - $weight) ;
 if($size_diff < 0){
-    $size_recommendation =  "You should loose $size_diff Kg." ;
+    // we add -$size_diff to make it positive number to be more logic 
+    $size_recommendation =  "You should loose ".-$size_diff ."Kg." ;
 }elseif($size_diff == 0){
     $size_recommendation =  "Your weight is Great " ;
 }else{
@@ -74,7 +75,7 @@ Weight:$weight </br>
 Size Recommendation : $size_recommendation </br>";
 
 
-/*
+
 switch ($size_diff) {
     case ($size_diff > 20):
         $size_recommendation = "Too skinny, You should weight $size_diff Kg." ;
@@ -85,18 +86,21 @@ switch ($size_diff) {
         break;
     
     case ($size_diff < -20):
-        $size_recommendation = "Too fat, You should loose $size_diff Kg." ;
+        $size_recommendation = "Too fat, You should loose ".-$size_diff." Kg." ;
         break;
     
     case ($size_diff < -5):
-        $size_recommendation = "Fat, You should loose $size_diff Kg." ;
+        $size_recommendation = "Fat, You should loose ".-$size_diff." Kg." ;
         break;
     
     default:
         $size_recommendation = "Your weight is Great " ;
         break;
 }
-*/
+echo "
+Tall:$tall </br> 
+Weight:$weight </br> 
+Size Recommendation : $size_recommendation </br>";
 
 
         
