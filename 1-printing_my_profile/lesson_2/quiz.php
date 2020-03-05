@@ -26,8 +26,11 @@ echo $colors[4];echo '<br>';
 
 echo $colors[count($colors)-1];echo '<br>'; // if I do not know the number of items 
 
+// it is a Wrong solution not just a bad one as it change the original array
 echo array_reverse($colors)[0];echo '<br>'; // if I do not know the number of items 
 
+// The best solution is by using end function
+echo end($colors);echo '<br>'; 
 
 #  change the second element from  countries array
 $countries['KSA'] = 'Saudia';
