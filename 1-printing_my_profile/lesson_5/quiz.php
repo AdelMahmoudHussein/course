@@ -42,6 +42,11 @@ echo '<br>';
 echo '<p>NO. 4</p>';
 $not_sorted = array(5,2,1,4,3);
 print_r($not_sorted);echo '<br>';
+
+/**
+ * sort_a function sort an array and print it
+ * @param $array type $array
+ */
 function sort_a($array){
     sort($array); 
     print_r($array);
@@ -58,6 +63,12 @@ echo '<br>';
 
 // First Bad Way
 echo '<p>NO. 5 First Bad Solution</p>';
+
+/**
+ * rm3 function remove 3 from array of numbers
+ * @param $array type $array
+ * @return $new type $array
+ */
 function rm3($array){
     $new = array();
     foreach ($array as $value) {
@@ -92,7 +103,7 @@ print_r(arr_merg($ar1, $ar2));
 
 # create for loop to print 9 numbers from 100 to 90 without 95 like this 100,99,98
 echo '<p>NO. 7</p>';
-echo '<p>NO. 7 First Way using nested loop</p>';
+echo '<p>NO. 7 First Way using for loop</p>';
 for($i=100; $i>90; $i--){
     if($i != 95){
         if($i!= 91){
