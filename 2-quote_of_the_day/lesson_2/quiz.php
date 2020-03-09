@@ -51,15 +51,18 @@ for ($i=10; $i >= -9; $i--){
 }
 
 
-
-
 # use foreach to print array numbers from 10 to -9
-echo "<h3  >NO. 3</h3>";
+echo "<h3  >NO. 3 First Solution</h3>";
 foreach (range(10, -9, -1) as $num) {
     echo "$num ";
     
 }
 
+echo "<h3  >NO. 3 Second Solution without step</h3>";
+foreach (range(10, -9) as $num) {
+    echo "$num ";
+    
+}
 
 
 # how to use $_GET with update function to send a param to update data rather than "John Daa"
@@ -83,6 +86,8 @@ echo "We use header('location: https://www.google.com/');";
 # redirect to this page with this get value (name=ahmed) and (age=35) and print it
 echo "<h3  >NO. 6</h3>";
 echo "<p class='q'>If we activate header line it will make infinite loop of redirection. How to avoid that ?</p>";
+echo "<p>By Not redirecting to the same page .</p>";
+
 $header = "header('location: ". '$_SERVER[PHP_SELF]'."?name=ahmed&age=35)";
 echo 'this is header: <br>' . $header . '<br>';
 // header("location: ". $_SERVER['PHP_SELF'].'?name=ahmed&age=35');
@@ -122,13 +127,13 @@ echo '<p>So use $_POST instead of.</p>';
 
 # what is the different between $_GET and $_POST - google it ?
 echo "<h3  >NO. 9</h3>";
-echo '<p>$_GET send data public through the url, Not secured</p>';
-echo '<p>&_POST send data private in header , more secure</p>';
+echo '<p>$_GET send data public through the url, Not secured, used with small files</p>';
+echo '<p>&_POST send data private in header , more secure, used with big files</p>';
 
 
 
 # how to redirect using header after 10 seconds - google it ?
-echo "<h3  >NO. 10</h3>";
+echo "<h3  >NO. 10 First Solution Bad way</h3>";
 echo '<p>Use sleep(10); just before header function</p>';
 echo "<p class='q'>Q: why page not show any content and wait seconds then redirect?</p>";
 /*
@@ -142,6 +147,12 @@ sleep(2);
 //header("location: index.php");
 
 //time_nanosleep(2, 100000);
+
+
+
+echo "<h3  >NO. 10 Second Solution Good way</h3>";
+echo '<p>Use header("Refresh: 5; url=index.php")</p>';
+//header("Refresh: 5; url=index.php");
 
 echo '<br>===================================<br>End<br>';
 
