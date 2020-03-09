@@ -126,7 +126,10 @@ function read()
 */
 
 # Change read function to read lines from bottom to above order
-
+/**
+ * the function read all lines from file and show them in a page
+ * @return array type 
+ */
 function read()
 {
     #example 1 read the file
@@ -161,10 +164,15 @@ function delete($id = NULL)
         unset($lines[$id]);
         $data = implode(PHP_EOL, $lines);
         file_put_contents($filename, $data);
-        header('Location: ' . 'index.php');       
+        header('Location: ' . 'index.php');
     }
 }
 
+/**
+ * The function delete multiple checked lines
+ * @param array type $ids
+ * NO Return
+ */
 function delete_checked($ids = NULL)
 {
     #example 4 remove specific line from file

@@ -19,7 +19,7 @@ include "functions.php" ;
         <form action="functions.php" method="POST" id="delete_form">
             <button type="submit" name="delete_checked" value = 1>Delete Checked</button>
         </form>
-    </td>    
+    </td>
     <td>Name</td>
     <td>Options</td>
     </thead>
@@ -35,11 +35,11 @@ include "functions.php" ;
                 </td>
             </tr>
         <?php };?>
-    </tbody>    
+    </tbody>
     <tfoot>
         <!--# add numbers of quotes on the bottom of index.php file into table footer tag--> 
         <tr>
-            <td><?php echo count($quotes);?></td>
+            <td colspan="3"><?php echo count($quotes);?></td>
         </tr>
     </tfoot>
 </table>
