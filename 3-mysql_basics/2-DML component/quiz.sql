@@ -31,11 +31,42 @@ SELECT * FROM orders WHERE order_date > 2005-09-12 AND order_num > 20006;
 SELECT * FROM order_items WHERE prod_id LIKE '%N%';
 
 # get all rows for these related columns (order_num,quantity,item_price,product name,customer name)
-SELECT orders.order_num, order_items.quantity, order_items.item_price, products.prod_name, customers.cust_name 
+
+-- My First Solution
+SELECT  orders.order_num, 
+        order_items.quantity, 
+        order_items.item_price, 
+        products.prod_name, 
+        customers.cust_name 
 FROM orders 
 INNER JOIN order_items ON orders.order_num = order_items.order_num
 INNER JOIN customers ON orders.cust_id = customers.cust_id
 INNER JOIN products ON order_items.prod_id = products.prod_id;
+
+
+-- Second Solution From Eng. Ahmed Fakhr
+SELECT  orders.order_num,
+        oit.quantity, 
+        oit.item_price,
+        products.prod_name, 
+        customers.cust_name
+    FROM orders
+    INNER JOIN order_items oit ON orders.order_num = oit.order_num
+    INNER JOIN products ON oit.prod_id = products.prod_id
+    INNER JOIN customers ON orders.cust_id = customers.cust_id  ;
+
+
+-- My Second Solution
+SELECT  orders.order_num, 
+        order_items.quantity, 
+        order_items.item_price, 
+        products.prod_name, 
+        customers.cust_name 
+FROM orders 
+INNER JOIN (order_items,customers,products) 
+ON      orders.order_num = order_items.order_num AND
+        orders.cust_id = customers.cust_id AND
+        order_items.prod_id = products.prod_id;
  
 # get all rows for these related columns (prod_price,prod_name,note_date,note_text) from products and product_notes
 SELECT products.prod_price, products.prod_name, product_notes.note_date, product_notes.note_text
