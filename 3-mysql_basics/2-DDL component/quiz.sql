@@ -4,7 +4,8 @@ CREATE DATABASE quizzes;
 
 # Create a new table with the name "students" into the database "quizzes" with these columns :
 # id - first_name - last_name - user_name - student_email - scores - serial_number - created
--- go inside database then run next code (is there any way to change current working on database by coding?)
+-- go inside database then run next code 
+-- (is there any way to change current working on database by coding?) => USE quizzes; True?
 CREATE TABLE students
 (
     id              INT, 
@@ -42,6 +43,7 @@ ALTER TABLE students
 # ADD comment to phone_number column ?
 ALTER TABLE students
     MODIFY phone_number  VARCHAR(15) NOT NULL COMMENT 'this is phone number';
+    -- (is there any other way?)
 
 # add created_at and updated_at column with timestamp and make update_at auto updated  ?
 ALTER TABLE students
