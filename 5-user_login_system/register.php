@@ -4,7 +4,7 @@
 		$username = strip_tags($_POST['username']);
 		$password = strip_tags(md5($_POST['password']));
 		$db = mysqli_connect("localhost", "root", "", "demo") or die ("Failed to connect");
-		$query = "INSERT INTO users(username,password,activated) VALUES('$username', '$password','1')";
+		$query = "INSERT INTO users(username,password,activated) VALUES('$username', '$password',1)";
 		$result = mysqli_query($db,$query);
 		if($result) {
 			echo "Successfully registered";
@@ -54,7 +54,7 @@
                     <div class="form-group">
                         <!-- Button -->
                         <div class="controls">
-                            <button type="submit" name="submit" value="Register" class="btn btn-success">Login</button>
+                            <button type="submit" name="submit" value="Register" class="btn btn-success">Register</button>
                             <a href="login.php" class="btn btn-info">Back</a>
                         </div>
                     </div>

@@ -4,7 +4,7 @@ if (isset($_POST['submit'])) {
     $subject = htmlspecialchars(stripslashes(trim($_POST['subject'])));
     $email = htmlspecialchars(stripslashes(trim($_POST['email'])));
     $message = htmlspecialchars(stripslashes(trim($_POST['message'])));
-    if (!preg_match("/^[A-Za-z .'-]+$/", $name)) {
+    if (!preg_match("/^[a-zA-Z ]*$/", $name)) {
         $name_error = 'Invalid name';
     }
     if (!preg_match("/^[A-Za-z .'-]+$/", $subject)) {
@@ -31,10 +31,10 @@ if (isset($_POST['submit'])) {
 	 ' . $message . '	
 	|---------END MESSAGE----------|';
     echo "Thank you fo your feedback. I will contact you shortly if needed.<br/>
-    Go to <a href='/index.php'>Home Page</a>";
+    Go to <a href='index.php'>Home Page</a>";
     mail($to, $subject, $body, $headers);
 } else {
     echo "You must write a message. </br> 
-    Please go to <a href='/index.php'>Home Page</a>";
+    Please go to <a href='index.php'>Home Page</a>";
 }
 
