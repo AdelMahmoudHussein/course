@@ -69,9 +69,13 @@ ON      orders.order_num = order_items.order_num AND
         order_items.prod_id = products.prod_id;
  
 # get all rows for these related columns (prod_price,prod_name,note_date,note_text) from products and product_notes
-SELECT products.prod_price, products.prod_name, product_notes.note_date, product_notes.note_text
+SELECT  products.prod_price, 
+        products.prod_name, 
+        product_notes.note_date, 
+        product_notes.note_text
 FROM products
-INNER JOIN product_notes ON products.prod_id = product_notes.prod_id;
+INNER JOIN product_notes 
+ON products.prod_id = product_notes.prod_id;
 
 # get all  rows from products even if no notes in  product_notes
 SELECT * FROM products;         -- it is tricky or miss typed
@@ -116,6 +120,11 @@ SELECT SUM(item_price) FROM order_items; -- column header will be SUM(item_price
 -- SUM and AVG functions only work on numeric data.
 -- If you want to exclude duplicate values from the aggregate function results, use the DISTINCT keyword. The ALL keyword includes even duplicates. If nothing is specified the ALL is assumed as the default.
 -- Aggregate functions can be used in conjunction with other SQL clauses such as GROUP BY
+
+SELECT SUM(DISTINCT item_price) AS total_distinct_sales FROM order_items;   # 111.95
+SELECT SUM(ALL item_price) AS total_all_sales FROM order_items;             # 141.95
+SELECT SUM(item_price) AS total_sales FROM order_items;                     # 141.95
+
 
 -- https://dev.mysql.com/doc/refman/8.0/en/group-by-functions.html
 -- NOTES
