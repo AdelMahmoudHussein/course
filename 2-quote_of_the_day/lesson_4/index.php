@@ -21,7 +21,7 @@ $quotes = read();
     <button type="submit" name="upload" value="1">Submit</button>
 </form>
 
-<table>
+<table border="3">
     <thead>
     <td>Name</td>
     <td>Options</td>

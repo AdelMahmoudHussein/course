@@ -30,7 +30,7 @@ $images = read();
     <button type="submit" name="upload" value="1">Submit</button>
 </form>
 
-<table>
+<table border="2">
     <thead>
     <td>Name</td>
     <td>Image</td>
