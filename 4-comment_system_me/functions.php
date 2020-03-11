@@ -45,24 +45,23 @@ function getComments($db)
         echo $row['comment_date'] . "<br>";
         // Echoes message from the database
         //nl2br()- Is a function that converts nl to break statements
-        echo nl2br($row['message']);
+        echo nl2br($row['message'])."</p>";
 
         //The 1st form below deletes user post
+        echo "  <form class= 'delete-form' method ='POST' action ='" . deleteComments($db) . "'>
+                    <input type='hidden' name='comment_id' value='" . $row['comment_id'] . "'>
+                    <button class='btn btn-danger' name='commentDelete'> Delete </button>
+                </form>";
         //The 2nd form below takes information to the next page and updates the database
-        echo "</p> 
-				<form class= 'delete-form' method ='POST' action ='" . deleteComments($db) . "'>
-					<input type='hidden' name='comment_id' value='" . $row['comment_id'] . "'>
-					<button class='btn btn-success' name='commentDelete'> Delete </button>
-				</form>
-				<form class= 'edit-form' method ='POST' action = 'edit_comment.php'>
-					<input type='hidden' name='comment_id' value='" . $row['comment_id'] . "'>
-					<input type='hidden' name='user_id' value='" . $row['user_id'] . "'>
-					<input type='hidden' name='comment_date' value='" . $row['comment_date'] . "'>
-					<input type='hidden' name='message' value='" . $row['message'] . "'>
-					<button class='btn btn-danger' > Edit </button>
-				</form>
-			
-			</div>";
+        echo "  <form class= 'edit-form' method ='POST' action = 'edit_comment.php'>
+                    <input type='hidden' name='comment_id' value='" . $row['comment_id'] . "'>
+                    <input type='hidden' name='user_id' value='" . $row['user_id'] . "'>
+                    <input type='hidden' name='comment_date' value='" . $row['comment_date'] . "'>
+                    <input type='hidden' name='message' value='" . $row['message'] . "'>
+                    <button class='btn btn-info' > Edit </button>
+                </form>";
+
+        echo "</div>";
     }
 }
 
@@ -137,24 +136,25 @@ function getLogin($db)
          * 'FOM users WHERE username= 'root' 
          * AND password= '25f9e794323b453885f5181f1b624d0b' at line 1*/
         
-        if (!$result = $db->query($sql)) {
+        if (!$result = $db->query($sql)) 
+        {
             //printf("Errormessage: %s\n", $db->error); 
             echo "<br>Errormessage: $db->error\n";
-        }else{
-            //mysqli_num_rows() - Counts the number of rows of element or variable between the brackets
-            if (mysqli_num_rows($result) == 1) {
-                if ($row = $result->fetch_assoc()) {
-                    $_SESSION['id'] = $row['id'];
-                    //Sends back to the index.php page and includes a mesaage(loginsuccess) after the url
-                    header("Location:index.php?loginsuccess");
-                    //Closes the script and prevents RESUBMISSION of the form
-                    exit(); // Do not understand why???
-                }
-            } else {
-                header("Location:index.php?loginfailed");
-                exit(); // Do not understand why???
-            }            
+            exit();
         }
+        //mysqli_num_rows() - Counts the number of rows of element or variable between the brackets
+        if (mysqli_num_rows($result) == 1) {
+            if ($row = $result->fetch_assoc()) {
+                $_SESSION['id'] = $row['id'];
+                //Sends back to the index.php page and includes a mesaage(loginsuccess) after the url
+                header("Location:index.php?loginsuccess");
+                //Closes the script and prevents RESUBMISSION of the form
+                exit(); // Do not understand why???
+            }
+        } else {
+            header("Location:index.php?loginfailed");
+            exit(); // Do not understand why???
+        }            
     }
 }
 
@@ -163,7 +163,7 @@ function userLogout()
 {
     if (isset($_POST['logout_submit'])) {
         //Starts the session
-        session_start();
+        session_start();    // what is the benefits of start a session again before destroy it it work fine without ???
         //Destroys the session
         session_destroy();
         header("Location:index.php");
