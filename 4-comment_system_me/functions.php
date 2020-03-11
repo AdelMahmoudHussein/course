@@ -5,10 +5,11 @@ function setComments($db)
 {
     //Returns true if comment_submit button is clicked
     if (isset($_POST['comment_submit'])) {
-
+        
         $user_id = $_POST['user_id'];
         $comment_date = $_POST['comment_date'];
-        $message = $_POST['message'];
+        // $message = $_POST['message'];
+        $message = filter_input(INPUT_POST,'message',FILTER_SANITIZE_SPECIAL_CHARS);
 
         $sql = "INSERT INTO comments(user_id,comment_date, message) VALUES('$user_id','$comment_date','$message')";
 
@@ -116,25 +117,43 @@ function getLogin($db)
         $password = md5($_POST['password']);
         //Selects everything(*) from table comments and stores it in a variable
         $sql = "SELECT * FROM users WHERE username= '$user_name' AND password= '$password' ";
-
+        // Trying to hack login
+        /*
+        admin'-- ;                                it will hack the system
+        admin' OR '1'='1                          it will hack the system
+        ngn' OR '1'='1' OR '1'='1                 it return all urers not only one so donot work 
+        ngn' OR '1'='1' OR '1'='1' LIMIT 1 -- ;   solved by using limit 1 and comment the rest of line
+        */
+        
         // Creates a connection($conn) and then query  everything selected from comments table
+        
+        // donot do any thing unless there is a bad query not wrong user or password like FOM instead of FROM
+        // and show cretical data in browser 
+        
+        // Example of error
+        /* Errormessage: You have an error in your SQL syntax; 
+         * check the manual that corresponds to your MySQL server version 
+         * for the right syntax to use near 
+         * 'FOM users WHERE username= 'root' 
+         * AND password= '25f9e794323b453885f5181f1b624d0b' at line 1*/
+        
         if (!$result = $db->query($sql)) {
-            printf("Errormessage: %s\n", $db->error);
-        }
-        //mysqli_num_rows() - Counts the number of rows of element or variable between the brackets
-        if (mysqli_num_rows($result) == 1) {
-            if ($row = $result->fetch_assoc()) {
-                $_SESSION['id'] = $row['id'];
-                //Sends back to the index.php page and includes a mesaage(loginsuccess) after the url
-                header("Location:index.php?loginsuccess");
-                //Closes the script and prevents RESUBMISSION of the form
-                exit();
-            }
-        } else {
-            header("Location:index.php?loginfailed");
-            var_dump($sql);
-            exit();
-
+            //printf("Errormessage: %s\n", $db->error); 
+            echo "<br>Errormessage: $db->error\n";
+        }else{
+            //mysqli_num_rows() - Counts the number of rows of element or variable between the brackets
+            if (mysqli_num_rows($result) == 1) {
+                if ($row = $result->fetch_assoc()) {
+                    $_SESSION['id'] = $row['id'];
+                    //Sends back to the index.php page and includes a mesaage(loginsuccess) after the url
+                    header("Location:index.php?loginsuccess");
+                    //Closes the script and prevents RESUBMISSION of the form
+                    exit(); // Do not understand why???
+                }
+            } else {
+                header("Location:index.php?loginfailed");
+                exit(); // Do not understand why???
+            }            
         }
     }
 }
