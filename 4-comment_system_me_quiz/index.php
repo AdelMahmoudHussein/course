@@ -50,11 +50,14 @@ session_start();
             // comment form
                "<form method='post' action='" . setComments($db) . "'>
                     <input type='hidden' name='user_id' value='$user_id'>
-                    <input type='hidden' name='comment_date' value='" . date('Y-m-d H:i:s') . "'>
                     <div class='form-group'>
                         <label class='control-label'>Title</label>
-                        <textarea class='form-control' name='message'></textarea><br>
+                        <textarea class='form-control' name='message' required></textarea><br>
                     </div>
+                    <div class='form-group'>
+                        <label class='control-label'>Description</label>
+                        <textarea class='form-control' name='message_description' required rows='8'></textarea><br>
+                    </div>                    
                     <button class='btn btn-success' type='submit' name='comment_submit'> Send </button>
                 </form>";
             
