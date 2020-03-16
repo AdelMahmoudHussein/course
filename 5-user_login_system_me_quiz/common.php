@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 //check if user registered,his data(username,password) is correct ,if yes set  session and cookie
 function user_login($username, $password)
 {
@@ -10,6 +10,9 @@ function user_login($username, $password)
         return "Authentication error";
     }
     else {
+        $_SESSION['logged'] = true ;
+        //echo $_SESSION['logged'];exit();
+        
         $_SESSION['username'] = $username;
         $_SESSION['user_pass'] = $password;
         $row = dbFetchAssoc(confirm_user($username, md5($password)));
@@ -32,8 +35,8 @@ function user_login($username, $password)
         $sql = "UPDATE users  SET last_login= NOW()  WHERE username='" . $username . "'";
 
         dbQuery($sql);
-
-        header('Location:' . WEB_ROOT . 'index.php');
+        
+        header('Location:' . WEB_ROOT . 'index.php'."?username=$username");
         exit;
     }
 }
@@ -48,6 +51,7 @@ function user_logout()
     setcookie("cookname", '', time() - 60 * 60 * 24 * COOKIE_TIME_OUT);
     setcookie("cookpass", '', time() - 60 * 60 * 24 * COOKIE_TIME_OUT);
     setcookie("cookrem", '', time() - 60 * 60 * 24 * COOKIE_TIME_OUT);
+    $_SESSION['logged']= false ;
     header('Location: ' . WEB_ROOT . 'login.php');
     exit;
 }
@@ -84,6 +88,62 @@ function confirm_user($username, $password)
     }
 
     return $result;
+}
+
+// create function for register
+function register()
+{
+    $temp = '';
+    $errors = '';
+    $clss = 'danger';
+    if(isset($_POST['submit'])){
+        // ??? I notice that it can create an account with the same username and that will make errors in system  
+        $username = strip_tags($_POST['username']);
+        $password = strip_tags($_POST['password']); // ??? is there any benefits of using strip_tags here with using md5 
+        $age = strip_tags($_POST['age']);
+        
+        if (empty($username) || empty($password) || empty($age)) {
+        $errors .= "\nUsername, Password and Age are required.";
+        $temp .= "N";
+        }
+
+        if (!empty($username) && strlen($username) > 80) {
+        $errors .= "\nMax length of User name:80";
+        $temp .= "N";
+        }
+
+        if ((!empty($password) && strlen($password) > 20)) {
+        $errors .= "\nMax length of Password:20";
+        $temp .= "N";
+        }
+
+        if (empty($temp)) {
+            // I delete it from above and add it here to make it possible to check length of password in validation not more than 20
+            $password = strip_tags(md5($_POST['password']));
+            $_POST['password'] = '';
+            $_POST['username'] = '';
+            $_POST['age'] = '';
+            $clss = 'success';
+            
+            $db = mysqli_connect("localhost", "root", "123456789", "demo") or die ("Failed to connect");
+            $query = "INSERT INTO users(username,password,age) VALUES('$username', '$password','$age')";
+            $result = mysqli_query($db,$query);
+            if($result) {
+                echo "Successfully registered"; // ??? it will never showen is it true and if that why add it
+                $_SESSION['logged']= true ;
+                $_SESSION['username'] = $username;
+                $_SESSION['age'] = $age;
+                header("Location: index.php");
+            }
+            else {
+                echo "Failed to register";
+            }
+        }
+    }
+}
+
+if(isset($_POST['submit'])){
+    register();
 }
 
 /*

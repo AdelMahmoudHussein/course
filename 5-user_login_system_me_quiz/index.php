@@ -1,6 +1,10 @@
 <?php
 require_once 'config.php';
-session_start();
+//session_start();
+if($_SESSION['logged'] !== true)
+{
+    header('Location: login.php');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,7 +17,7 @@ session_start();
 <body>
 <div class="container">
     <div class="jumbotron">
-        Welcome! You have successfully logged in. Thank you.
+        Welcome <?php echo $_SESSION['username']; ?>, You have successfully logged in.<?= isset($_SESSION['age']) ?  'Your age is '.$_SESSION['age'] : "" ; ?> Thank you.
         <a href="<?php echo WEB_ROOT; ?>logout.php" onclick="return confirm('Are you sure want to logout?')">Logout</a>
     </div>
 

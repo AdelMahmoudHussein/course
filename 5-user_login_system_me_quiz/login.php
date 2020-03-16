@@ -4,6 +4,16 @@ require 'config.php';
 $temp = '';
 $errors = '';
 $clss = 'danger';
+/*
+if(isset($_SESSION['logged']))
+{
+    if($_SESSION['logged'] === true)
+    {
+        header('Location : index.php');
+    }
+}
+*/
+
 if (isset($_POST['login'])) {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']); 

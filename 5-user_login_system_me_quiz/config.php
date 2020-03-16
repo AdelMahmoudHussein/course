@@ -27,7 +27,7 @@ $srvRoot = str_replace('config.php', '', $thisFile);
 define('WEB_ROOT', $webRoot);
 define('SRV_ROOT', $srvRoot);
 
-define("COOKIE_TIME_OUT", 1); //specify cookie timeout in days
+define("COOKIE_TIME_OUT", 1/48); //specify cookie timeout in days
 
 require_once 'database.php';
 require_once 'common.php';
