@@ -1,25 +1,25 @@
 <?php 
-	session_start();
-	if(isset($_POST['submit'])){
-		$username = strip_tags($_POST['username']);
-		$password = strip_tags(md5($_POST['password']));
-		$db = mysqli_connect("localhost", "root", "", "demo") or die ("Failed to connect");
-		$query = "INSERT INTO users(username,password,activated) VALUES('$username', '$password',1)";
-		$result = mysqli_query($db,$query);
-		if($result) {
-			echo "Successfully registered";
-			header('Location: index.php');
-		}
-		else {
-			echo "Failed to register";
-		}
-	}
+    session_start();
+    if(isset($_POST['submit'])){
+        $username = strip_tags($_POST['username']);
+        $password = strip_tags(md5($_POST['password'])); // ??? is there any benefits of using strip_tags here with using md5 
+        $db = mysqli_connect("localhost", "root", "123456789", "demo") or die ("Failed to connect");
+        $query = "INSERT INTO users(username,password,activated) VALUES('$username', '$password',1)";
+        $result = mysqli_query($db,$query);
+        if($result) {
+            echo "Successfully registered";
+            header('Location: index.php');
+        }
+        else {
+            echo "Failed to register";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Register</title>
+    <title>Register</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
