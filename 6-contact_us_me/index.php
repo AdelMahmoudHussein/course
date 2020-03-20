@@ -1,5 +1,10 @@
 <?php
-session_start(); ?>
+session_start();
+session_destroy();
+session_start(); 
+
+require 'send_mail.php';
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,8 +12,8 @@ session_start(); ?>
     </head>
     <body>
         <div class="container">  
-            <form id="contact" action="send_mail.php" method="post">
-                <h3>Quick Contact</h3>
+            <form id="contact" method="post" action="">
+                <h3>Quick Contact ME</h3>
                 <h4>Contact us today, and get reply with in 24 hours!</h4>
 
                 <fieldset>
@@ -22,24 +27,28 @@ session_start(); ?>
                 </fieldset>
 
                 <fieldset>
-                    <input placeholder="Full Name" type="text" name="name" tabindex="1" required autofocus>
-                    <p><?php if (isset($_SESSION['name_error'])) echo $_SESSION['name_error']; ?></p>
+                    <input placeholder="Full Name" type="text" name="name" tabindex="1" required autofocus 
+                           value="<?= (!empty($_POST['name'])) ? $_POST['name'] :'' ;?>">
+                    <p><?php if (!empty($_SESSION['name_error'])) echo $_SESSION['name_error']; ?></p>
                 </fieldset>
                 <fieldset>
-                    <input placeholder="Email Address" type="email" name="email" tabindex="2" required>
-                    <p><?php if (isset($email_error)) echo $email_error; ?></p>
+                    <input placeholder="Email Address" type="email" name="email" tabindex="2" required 
+                           value="<?= (!empty($_POST['email'])) ? $_POST['email'] :'' ;?>">
+                    <p><?php if (!empty($_SESSION['email_error'])) echo $_SESSION['email_error']; ?></p>
                 </fieldset>
                 <fieldset>
-                    <input placeholder="Subject" type="text" name="subject" tabindex="3" required>
-                    <p><?php if (isset($subject_error)) echo $subject_error; ?></p>
+                    <input placeholder="Subject" type="text" name="subject" tabindex="3" required 
+                           value="<?= (!empty($_POST['subject'])) ? $_POST['subject'] :'' ;?>">
+                    <p><?php if (!empty($_SESSION['subject_error'])) echo $_SESSION['subject_error']; ?></p>
                 </fieldset>
 
                 <fieldset>
-                    <textarea placeholder="Type your Message Here...." name="message" tabindex="4" required></textarea>
-                    <p><?php if (isset($message_error)) echo $message_error; ?></p>
+                    <textarea placeholder="Type your Message Here...." name="message" tabindex="4" required 
+                              value="<?= (!empty($_POST['message'])) ? $_POST['message'] :'' ;?>"></textarea>
+                    <p><?php if (!empty($_SESSION['message_error'])) echo $_SESSION['message_error']; ?></p>
                 </fieldset>
                 <fieldset>
-                    <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+                    <button name="submit" type="submit" id="contact-submit">Submit</button>
                     <!-- data-submit="...Sending" ??? -->
                 </fieldset>
           </form> 

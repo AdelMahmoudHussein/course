@@ -52,4 +52,7 @@
 #   3. delete $comment_date = $_POST['comment_date']; from setComment() Function
 #   4.delete comment_date from sql query in $sql = "INSERT INTO comments(user_id,comment_date, message, message_description) VALUES('$user_id','$comment_date','$message', '$message_description')";
 #
-#
+/*
+ * Questions
+ * 
+ */
