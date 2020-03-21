@@ -39,8 +39,8 @@ while ($row = $result->fetch_assoc()) {
     echo "<tr>";
 
     echo "<th>" . $row['priority_id'] . "</th>";
-    echo "<th>" . $row['name'] . "</th>";
-    echo "<th>" . $row['email'] . "</th>";
+    echo "<td>" . $row['name'] . "</th>";
+    echo "<td>" . $row['email'] . "</th>";
     echo "<td>" . $row['age'] . "</td>";
 
     echo "<td>" . nl2br($row['subject']) . "</td>";
