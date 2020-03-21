@@ -3,7 +3,14 @@ session_start();
 session_destroy();
 session_start(); 
 
+require 'db.php';
 require 'send_mail.php';
+$sql = "SELECT * FROM priority";
+if (!$result = $db->query($sql)) {
+    printf("Error message: %s\n", $db->error);
+    exit();
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,11 +25,12 @@ require 'send_mail.php';
 
                 <fieldset>
 
-                    <select>
-                        <option value="0">--Choose Priority --</option>
-                        <option value="1">High</option>
-                        <option value="2">Medium</option>
-                        <option value="3">Low</option>
+                    <select name='priority'>
+                        <?php 
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<option value='{$row['priority_id']}'>{$row['priority_name']}</option>";
+                        }
+                        ?>
                     </select>
                 </fieldset>
 
@@ -31,21 +39,34 @@ require 'send_mail.php';
                            value="<?= (!empty($_POST['name'])) ? $_POST['name'] :'' ;?>">
                     <p><?php if (!empty($_SESSION['name_error'])) echo $_SESSION['name_error']; ?></p>
                 </fieldset>
+                
                 <fieldset>
                     <input placeholder="Email Address" type="email" name="email" tabindex="2" required 
                            value="<?= (!empty($_POST['email'])) ? $_POST['email'] :'' ;?>">
                     <p><?php if (!empty($_SESSION['email_error'])) echo $_SESSION['email_error']; ?></p>
                 </fieldset>
+                
                 <fieldset>
-                    <input placeholder="Subject" type="text" name="subject" tabindex="3" required 
+                    <input placeholder="Age" type="text" name="age" tabindex="3" required  
+                           value="<?= (!empty($_POST['age'])) ? $_POST['age'] :'' ;?>">
+                    <p><?php if (!empty($_SESSION['age_error'])) echo $_SESSION['age_error']; ?></p>
+                </fieldset>
+                
+                <fieldset>
+                    <input placeholder="Subject" type="text" name="subject" tabindex="4" required 
                            value="<?= (!empty($_POST['subject'])) ? $_POST['subject'] :'' ;?>">
                     <p><?php if (!empty($_SESSION['subject_error'])) echo $_SESSION['subject_error']; ?></p>
                 </fieldset>
 
                 <fieldset>
-                    <textarea placeholder="Type your Message Here...." name="message" tabindex="4" required 
+                    <textarea placeholder="Type your Message Here...." name="message" tabindex="5" required 
                               value="<?= (!empty($_POST['message'])) ? $_POST['message'] :'' ;?>"></textarea>
                     <p><?php if (!empty($_SESSION['message_error'])) echo $_SESSION['message_error']; ?></p>
+                </fieldset>
+                
+                <fieldset>
+                    <input type="file" name="file" tabindex="6">
+                    <p><?php // if (!empty($_SESSION['subject_error'])) echo $_SESSION['subject_error']; ?></p>
                 </fieldset>
                 <fieldset>
                     <button name="submit" type="submit" id="contact-submit">Submit</button>
