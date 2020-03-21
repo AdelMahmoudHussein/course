@@ -40,7 +40,6 @@ session_start(); ?>
                 </fieldset>
                 <fieldset>
                     <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
-                    <!-- data-submit="...Sending" ??? -->
                 </fieldset>
           </form> 
         </div>

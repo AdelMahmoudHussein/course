@@ -129,7 +129,8 @@ function register()
             $query = "INSERT INTO users(username,password,age) VALUES('$username', '$password','$age')";
             $result = mysqli_query($db,$query);
             if($result) {
-                echo "Successfully registered"; // ??? it will never showen is it true and if that why add it
+                // echo "Successfully registered"; // ??? it will never showen is it true and if that why add it
+                // yes so we delete it (it was in a step in developping)
                 $_SESSION['logged']= true ;
                 $_SESSION['username'] = $username;
                 $_SESSION['age'] = $age;

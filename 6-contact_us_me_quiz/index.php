@@ -25,51 +25,53 @@ if (!$result = $db->query($sql)) {
 
                 <fieldset>
 
-                    <select name='priority'>
+                    <select name='priority' required autofocus tabindex="1">
+                        <option value='0' disabled selected>--Choose Priority --</option>
                         <?php 
                         while ($row = $result->fetch_assoc()) {
                             echo "<option value='{$row['priority_id']}'>{$row['priority_name']}</option>";
                         }
                         ?>
                     </select>
+                    <p><?php if (!empty($_SESSION['priority_error'])) echo $_SESSION['priority_error']; ?></p>
                 </fieldset>
 
                 <fieldset>
-                    <input placeholder="Full Name" type="text" name="name" tabindex="1" required autofocus 
+                    <input placeholder="Full Name" type="text" name="name" tabindex="2" required  
                            value="<?= (!empty($_POST['name'])) ? $_POST['name'] :'' ;?>">
                     <p><?php if (!empty($_SESSION['name_error'])) echo $_SESSION['name_error']; ?></p>
                 </fieldset>
                 
                 <fieldset>
-                    <input placeholder="Email Address" type="email" name="email" tabindex="2" required 
+                    <input placeholder="Email Address" type="email" name="email" tabindex="3" required 
                            value="<?= (!empty($_POST['email'])) ? $_POST['email'] :'' ;?>">
                     <p><?php if (!empty($_SESSION['email_error'])) echo $_SESSION['email_error']; ?></p>
                 </fieldset>
                 
                 <fieldset>
-                    <input placeholder="Age" type="text" name="age" tabindex="3" required  
+                    <input placeholder="Age" type="number" name="age" tabindex="4" required max="130" min="12"
                            value="<?= (!empty($_POST['age'])) ? $_POST['age'] :'' ;?>">
                     <p><?php if (!empty($_SESSION['age_error'])) echo $_SESSION['age_error']; ?></p>
                 </fieldset>
                 
                 <fieldset>
-                    <input placeholder="Subject" type="text" name="subject" tabindex="4" required 
+                    <input placeholder="Subject" type="text" name="subject" tabindex="5" required 
                            value="<?= (!empty($_POST['subject'])) ? $_POST['subject'] :'' ;?>">
                     <p><?php if (!empty($_SESSION['subject_error'])) echo $_SESSION['subject_error']; ?></p>
                 </fieldset>
 
                 <fieldset>
-                    <textarea placeholder="Type your Message Here...." name="message" tabindex="5" required 
-                              value="<?= (!empty($_POST['message'])) ? $_POST['message'] :'' ;?>"></textarea>
+                    <textarea placeholder="Type your Message Here...." name="message" tabindex="6" required 
+                             ><?= (!empty($_POST['message'])) ? $_POST['message'] :'' ;?></textarea>
                     <p><?php if (!empty($_SESSION['message_error'])) echo $_SESSION['message_error']; ?></p>
                 </fieldset>
                 
                 <fieldset>
-                    <input type="file" name="file" tabindex="6">
-                    <p><?php // if (!empty($_SESSION['subject_error'])) echo $_SESSION['subject_error']; ?></p>
+                    <input type="file" name="file" tabindex="7">
+                    <p><?php // if (!empty($_SESSION['file_error'])) echo $_SESSION['file_error']; ?></p>
                 </fieldset>
                 <fieldset>
-                    <button name="submit" type="submit" id="contact-submit">Submit</button>
+                    <button name="submit" type="submit" id="contact-submit" tabindex="7" >Submit</button>
                     <!-- data-submit="...Sending" ??? -->
                 </fieldset>
           </form> 

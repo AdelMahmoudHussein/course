@@ -19,6 +19,11 @@ if(isset($_POST['submit']))
 
 function check_errors($name,$email,$age,$subject,$message)
 {
+    if (!in_array($priority, ['1','2','3'])) 
+    {
+        $_SESSION['priority_error'] = 'You Must Choose Valid Priority';
+    }
+    
     if (!preg_match("/^[a-zA-Z ]*$/", $name))
     {
         $_SESSION['name_error'] = 'Invalid name';
@@ -50,10 +55,13 @@ function check_errors($name,$email,$age,$subject,$message)
         $_SESSION['message_error'] = 'Your message should not be empty';
     }
 
-    // Check for errors found
-    if(!empty($_SESSION['name_error']) || !empty($_SESSION['subject_error'])
-            || !empty($_SESSION['email_error']) || !empty($_SESSION['message_error'])
-            || !empty($_SESSION['age_error']))
+    // Check for errors found $_SESSION['priority_error']
+    if(    !empty($_SESSION['priority_error']) 
+        || !empty($_SESSION['name_error']) 
+        || !empty($_SESSION['subject_error'])
+        || !empty($_SESSION['email_error']) 
+        || !empty($_SESSION['message_error'])
+        || !empty($_SESSION['age_error']))
     {
         return false;
     }
