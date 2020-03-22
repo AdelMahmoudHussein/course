@@ -11,12 +11,37 @@ if (!$result = $db->query($sql)) {
 
 <!DOCTYPE html>
 <html>
-<!--head tag with meta data and css, js-->    
+   
 <head>
     <meta charset='utf-8'>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            padding: 10px;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        table tr td, table tr th{
+            border: solid 1px #999;
+            padding: 5px;
+            text-align: left;
+        }
+        table tr th{
+            color: #FFF;
+            background: #666;
+        }
+        table tr:nth-child(2n){
+            background: #e4e4e4;
+        }
+        table tr:hover{
+            background: yellow;
+        }
+
+    </style>
 </head>
 <body>
 <?php    
@@ -38,7 +63,7 @@ while ($row = $result->fetch_assoc()) {
     //div class comment box is used to style the comment box
     echo "<tr>";
 
-    echo "<th>" . $row['priority_id'] . "</th>";
+    echo "<td>" . $row['priority_id'] . "</th>";
     echo "<td>" . $row['name'] . "</th>";
     echo "<td>" . $row['email'] . "</th>";
     echo "<td>" . $row['age'] . "</td>";
