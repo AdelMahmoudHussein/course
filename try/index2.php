@@ -10,7 +10,8 @@ $fromName = 'CodexWorld';
 $subject = 'PHP Email with Attachment by CodexWorld'; 
 
 //attachment file path
-$file = "message.txt";
+$file = "C:/laragon/www/webeasystep/6-contact_us_me_quiz/message.txt";
+//$file = "message.txt"; It must be long path full path
 
 //email body content
 $htmlContent = '<h1>PHP Email with Attachment by CodexWorld</h1>
@@ -50,6 +51,6 @@ $returnpath = "-f" . $from;
 
 //send email
 $mail = mail($to, $subject, $message, $headers, $returnpath); 
-
+//$mail = mail($to, $subject, $message, $headers); 
 //email sending status
 echo $mail ? "<h1>Mail sent.</h1>" : "<h1>Mail sending failed.</h1>";
