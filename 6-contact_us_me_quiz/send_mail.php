@@ -8,7 +8,7 @@ if(isset($_POST['submit']))
     $age = htmlspecialchars(stripslashes(trim($_POST['age'])));
     $subject = htmlspecialchars(stripslashes(trim($_POST['subject'])));
     $message = htmlspecialchars(stripslashes(trim($_POST['message'])));
-    send_mail($name,$email,$age,$subject,$message);
+    send_mail($priority,$name,$email,$age,$subject,$message);
     send_to_db($db,$priority,$name,$email,$age,$subject,$message);
 }
 //else
@@ -17,7 +17,7 @@ if(isset($_POST['submit']))
 //        <h3>Please go to <a href='index.php'>Home Page</a></h3>";
 //    }
 
-function check_errors($name,$email,$age,$subject,$message)
+function check_errors($priority,$name,$email,$age,$subject,$message)
 {
     if (!in_array($priority, ['1','2','3'])) 
     {
@@ -71,10 +71,10 @@ function check_errors($name,$email,$age,$subject,$message)
     }
 }
 
-function send_mail($name,$email,$age,$subject,$message)
+function send_mail($priority,$name,$email,$age,$subject,$message)
 {
 
-    if(check_errors($name,$email,$age,$subject,$message))
+    if(check_errors($priority,$name,$email,$age,$subject,$message))
     {
         $to = "email@yahoo.com";
         // change headers to array instead of string to avoid missSpiling \r\n (available from 7.2 version)
@@ -107,7 +107,7 @@ function send_mail($name,$email,$age,$subject,$message)
 
 function send_to_db($db,$priority,$name,$email,$age,$subject,$message)
 {
-    if(check_errors($name,$email,$age,$subject,$message))
+    if(check_errors($priority,$name,$email,$age,$subject,$message))
     {
         $sql= "INSERT INTO contact_us(priority_id,name,email,age,subject,message) "
                 . "VALUES('$priority','$name','$email','$age','$subject','$message')";
