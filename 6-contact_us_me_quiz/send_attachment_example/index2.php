@@ -85,8 +85,7 @@ ob_start(); //Turn on output buffering
 --PHP-mixed-<?php echo $random_hash; ?> 
 Content-Type: multipart/alternative; boundary="PHP-alt-<?php echo $random_hash; ?>"
 
---PHP-alt-<?php echo $random_hash; ?> 
-<!--Content-Type: text/plain; charset="iso-8859-1"-->
+--PHP-alt-<?php echo $random_hash; ?>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 

@@ -4,7 +4,7 @@ session_destroy();
 session_start(); 
 
 require 'db.php';
-require 'send_mail.php';
+require 'send_mail2.php';
 $sql = "SELECT * FROM priority";
 if (!$result = $db->query($sql)) {
     printf("Error message: %s\n", $db->error);
@@ -31,7 +31,7 @@ if (!$result = $db->query($sql)) {
     </head>
     <body>
         <div class="container">  
-            <form id="contact" method="post" action="">
+            <form id="contact" method="post" action="" enctype="multipart/form-data">
                 <h3>Quick Contact ME</h3>
                 <h4>Contact us today, and get reply with in 24 hours!</h4>
 
@@ -79,11 +79,11 @@ if (!$result = $db->query($sql)) {
                 </fieldset>
                 
                 <fieldset>
-                    <input type="file" name="file" tabindex="7">
-                    <p><?php // if (!empty($_SESSION['file_error'])) echo $_SESSION['file_error']; ?></p>
+                    <input type="file" name="attachment" tabindex="7" required>
+                    <p><?php //if (!empty($_SESSION['file_error'])) echo $_SESSION['file_error']; ?></p>
                 </fieldset>
                 <fieldset>
-                    <button name="submit" type="submit" id="contact-submit" tabindex="7" >Submit</button>
+                    <button name="submit" type="submit" id="contact-submit" tabindex="8" >Submit</button>
                     <!-- data-submit="...Sending" ??? -->
                 </fieldset>
           </form> 

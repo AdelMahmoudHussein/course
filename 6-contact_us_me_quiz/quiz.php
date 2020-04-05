@@ -20,7 +20,7 @@
 # Step 3 : add new upload field and send contact form with this attachment to the email
 
 /*
- * ???
+ * DONE in send_mail2.php
  */
 
 # Step 4 : make priority dropdown loaded dynamically from a priority table
@@ -44,5 +44,6 @@
 
 // Send inputs into HTML template to the  email via PHP use keyword (sending html email with php)
 /*
- * 
+ * DONE
+ * $message .= file_get_contents("message.html");
  */
