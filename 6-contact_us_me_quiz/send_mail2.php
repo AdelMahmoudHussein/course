@@ -13,10 +13,12 @@ if(isset($_POST['submit']))
     $attachment_name = $_FILES['attachment']['name'];
     $attachment_temp = $_FILES['attachment']['tmp_name'];
     $attachment_type = $_FILES['attachment']['type'];
-    $attachment_name_without_ext = trim(implode('.',explode('.', $attachment_name,-1)));
+//  $attachment_name_without_ext = trim(implode('.',explode('.', $attachment_name,-1)));
+    $attachment_name_without_ext = pathinfo($attachment_name, PATHINFO_FILENAME);
     
     sendAttachment($to_email, $priority, $from_name, $from_email, $age, $subject, $message, $attachment_temp, $attachment_type, $attachment_name_without_ext);
-    send_to_db($db, $priority, $from_name, $from_email, $age, $subject, $message);
+    $new_attachment_name = upload_attachment($attachment_name, $attachment_temp);
+    send_to_db($db, $priority, $from_name, $from_email, $age, $subject, $message, $new_attachment_name);
 }
 
 function check_errors($priority, $from_name, $from_email, $age, $subject, $message)
@@ -73,12 +75,12 @@ function check_errors($priority, $from_name, $from_email, $age, $subject, $messa
     }
 }
 
-function send_to_db($db,$priority,$from_name,$from_email,$age,$subject,$message)
+function send_to_db($db,$priority,$from_name,$from_email,$age,$subject,$message, $new_attachment_name)
 {
     if(check_errors($priority,$from_name,$from_email,$age,$subject,$message))
     {
-        $sql= "INSERT INTO contact_us(priority_id,name,email,age,subject,message) "
-                . "VALUES('$priority','$from_name','$from_email','$age','$subject','$message')";
+        $sql= "INSERT INTO contact_us(priority_id,name,email,age,subject,message, attachment) "
+                . "VALUES('$priority','$from_name','$from_email','$age','$subject','$message', '$new_attachment_name')";
     
         if (!$result = $db->query($sql)) {
         printf("Error message: %s\n", $db->error);
@@ -147,4 +149,13 @@ echo $mail_sent ? "<h1 style='color:GREEN; text-align:center;'>Thank you for you
         </h1><h3>Go to <a href='index.php'>Home Page</a></h3>" : "<h3 style='color:RED; text-align:center;'>Mail failed</h3>";
 }
 }
+
+
+function upload_attachment($attachment_name, $attachment_temp)
+{
+    $uploads_dir = 'attachments';
+    move_uploaded_file($attachment_temp, "$uploads_dir/$attachment_name");
+    return $attachment_name;
+}
+
 ?>
