@@ -41,8 +41,6 @@
                 // Check whether there is data on the page URL
                 $page = (isset($_GET['page']) && $_GET['page'] >= 1) ? $_GET['page'] : 1;
 
-                 $limit = 5; // Amount of data per page
-
                  // Make a query to display to what number will be displayed in a table in the database
                  $limit_start = ($page - 1) * $limit;
 

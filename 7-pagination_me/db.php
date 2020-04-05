@@ -2,7 +2,7 @@
 $host = 'localhost'; // The hostname
 $username = 'root'; // username
 $password = '123456789'; // Password (Fill in if using a password)
-$database = 'demo5'; // The name of the database
+$database = 'demo'; // The name of the database
 
 $limit = 5; // Amount of data per page
 
