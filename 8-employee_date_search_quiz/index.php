@@ -6,7 +6,6 @@ include "config.php";
     <head>
         <title>jQuery Datepicker to filter records with PHP MySQL</title>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -31,19 +30,19 @@ include "config.php";
 
         <div class="row">
         <!-- Search filter -->
-        <form class="form-inline" method='post' action=''>
-            <div class="form-group">
-                <label>Start Date </label>
-                <input type='text' class='dateFilter form-control' name='fromDate' value='<?php if(isset($_POST['fromDate'])) echo $_POST['fromDate']; ?>'>
-            </div>
-            <div class="form-group">
-                <label>End Date </label>
-                <input type='text' class='dateFilter form-control' name='endDate' value='<?php if(isset($_POST['endDate'])) echo $_POST['endDate']; ?>'>
-            </div>
-            <div class="form-group">
-            <input type='submit' class="btn btn-info" name='but_search' value='Search'>
-            </div>
-        </form>
+            <form class="form-inline" method='post' action=''>
+                <div class="form-group">
+                    <label>Start Date </label>
+                    <input type='text' class='dateFilter form-control' name='fromDate' value='<?php if(isset($_POST['fromDate'])) echo $_POST['fromDate']; ?>'>
+                </div>
+                <div class="form-group">
+                    <label>End Date </label>
+                    <input type='text' class='dateFilter form-control' name='endDate' value='<?php if(isset($_POST['endDate'])) echo $_POST['endDate']; ?>'>
+                </div>
+                <div class="form-group">
+                    <input type='submit' class="btn btn-info" name='but_search' value='Search'>
+                </div>
+            </form>
 
         <!-- Employees List -->
         <div style="padding: 0 15px;">

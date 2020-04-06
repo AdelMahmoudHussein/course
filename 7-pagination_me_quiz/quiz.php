@@ -41,6 +41,15 @@
 # Step 6 : print every page with only 5 rows
 /**
  * 1.add button for printing 
- * 2.
- * 3.
+ * 2.Add this in style
+ *      @media print {
+            .pageBreak {
+                page-break-after: always;
+            }
+        }
+ * 3.in table creation loop 
+        if($no % 5 == 0) {
+            echo '<span class="pageBreak"></span>' . PHP_EOL;
+        }
+ * 4.But Also not work. WHY???
  */

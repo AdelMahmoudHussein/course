@@ -1,0 +1,25 @@
+@page
+{
+    size: A4;
+    margin: 0;
+}
+
+#print_btn
+{
+    display: none;
+    visibility: none;
+}
+
+.pageBreak {
+    break-after: always;
+}
+
+.align-middle {
+    vertical-align: middle !important;
+}
+
+@media print {
+    .pageBreak {
+        break-after: always;
+    }
+}
