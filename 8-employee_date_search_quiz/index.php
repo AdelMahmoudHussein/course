@@ -22,7 +22,7 @@ include "config.php";
         });
         </script>
     </head>
-    <body >
+    <body>
     <div class="container">
         <div class="jumbotron">
             <h1>Employee date search Tutorial</h1>
