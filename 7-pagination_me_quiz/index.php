@@ -53,7 +53,8 @@
                 <?php
                 // Check whether there is data on the page URL
                 $page = (isset($_GET['page']) && $_GET['page'] >= 1) ? $_GET['page'] : 1;
-
+                $page = (isset($_GET['page']) && $_GET['page'] > $total_page) ?  $total_page : $page;
+                    
                  // Make a query to display to what number will be displayed in a table in the database
                  $limit_start = ($page - 1) * $limit;
 

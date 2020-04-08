@@ -1,5 +1,5 @@
 <?php 
-include "config.php";
+require "functions.php";
 ?>
 <!doctype html>
 <html>
@@ -25,79 +25,40 @@ include "config.php";
     <body>
     <div class="container">
         <div class="jumbotron">
-            <h1>Employee date search Tutorial</h1>
+            <h1><a href="index.php">Employee date search Tutorial</a></h1>
         </div>
 
         <div class="row">
+            
         <!-- Search filter -->
-            <form class="form-inline" method='post' action=''>
-                <div class="form-group">
-                    <label>Start Date </label>
-                    <input type='text' class='dateFilter form-control' name='fromDate' value='<?php if(isset($_POST['fromDate'])) echo $_POST['fromDate']; ?>'>
-                </div>
-                <div class="form-group">
-                    <label>End Date </label>
-                    <input type='text' class='dateFilter form-control' name='endDate' value='<?php if(isset($_POST['endDate'])) echo $_POST['endDate']; ?>'>
-                </div>
-                <div class="form-group">
-                    <input type='submit' class="btn btn-info" name='but_search' value='Search'>
-                </div>
-            </form>
+            <?php require 'search_filter_form.php'; ?>
 
+        <!-- Limit Select -->
+            <?php require 'limit_select_form.php'; ?>
+        
         <!-- Employees List -->
-        <div style="padding: 0 15px;">
-            <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover">
-                <tr>
-                    <th>Name</th>
-                    <th>Image</th>
-                    <th>Date of Join</th>
-                    <th>Gender</th>
-                    <th>Email</th>
-                </tr>
-
+            <div style="padding: 0 15px;">
+                <br/>
+                
+            <!-- add new employee form (button) -->
+                <?php require 'add_form.php'; ?>
+                
+                <br/>
+                
                 <?php
-                $emp_query = "SELECT * FROM employee WHERE 1 ";
+                // table header                     
+                    require 'table_header.php';
 
-                // Date filter
-                if(isset($_POST['but_search'])){
-                    $fromDate = $_POST['fromDate'];
-                    $endDate = $_POST['endDate'];
+                // logic  and read data
+                    require 'read_data.php';
 
-                    if(!empty($fromDate) && !empty($endDate)){
-                        $emp_query .= " and date_of_join between '".$fromDate."' and '".$endDate."' ";
-                    }
-                }
-
-                // Sort
-                $emp_query .= " ORDER BY date_of_join DESC";
-                $employeesRecords = mysqli_query($con,$emp_query);
-
-                // Check records found or not
-                if(mysqli_num_rows($employeesRecords) > 0){
-                    while($empRecord = mysqli_fetch_assoc($employeesRecords)){
-                        $id = $empRecord['id'];
-                        $empName = $empRecord['emp_name'];
-                        $date_of_join = $empRecord['date_of_join'];
-                        $gender = $empRecord['gender'];
-                        $email = $empRecord['email'];
-
-                        echo "<tr>";
-                        echo "<td>". $empName ."</td>";
-                        echo "<td><img src='https://i.pravatar.cc/70?u=". $email ."'/></td>";
-                        echo "<td>". $date_of_join ."</td>";
-                        echo "<td>". $gender ."</td>";
-                        echo "<td>". $email ."</td>";
-                        echo "</tr>";
-                    }
-                }else{
-                    echo "<tr>";
-                    echo "<td colspan='4'>No record found.</td>";
-                    echo "</tr>";
-                }
+                // show data in table body
+                    require 'table_body.php';
+                    
+                //include pagination bar code
+                    require 'pagination_bar.php';
                 ?>
-            </table>
-        </div>
+            </div>
         </div>
     </body>
 </html>

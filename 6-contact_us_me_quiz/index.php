@@ -38,7 +38,7 @@ if (!$result = $db->query($sql)) {
                 <fieldset>
 
                     <select name='priority' required autofocus tabindex="1">
-                        <option value='0' disabled selected>--Choose Priority --</option>
+                        <option value='' disabled selected>--Choose Priority --</option>
                         <?php 
                         while ($row = $result->fetch_assoc()) {
                             echo "<option value='{$row['priority_id']}'>{$row['priority_name']}</option>";
